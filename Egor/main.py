@@ -36,8 +36,8 @@ ball = Vector()
 ball.x = 250
 ball.y = 10
 ball.size = 10
-ball.angle = 300
-ball.speed = 10
+ball.angle = 273
+ball.speed = 20
     
 
 
@@ -52,7 +52,7 @@ while (1):
     else:
         print("!!!")
         if (ball.x<=0): # врезались левой частью
-            ball.angle = ball.angle-360
+            ball.angle = 360-ball.angle
         if (ball.y<=0): # врезались верхней частью
             pass
         if (ball.x+ball.size>=AREA_X): # врезались правой чстью
