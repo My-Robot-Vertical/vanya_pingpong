@@ -3,7 +3,7 @@ from physics_core import *
 
 
 class Ball(Vector):
-    
+
     def __init__(self):
         Vector.__init__(self)
         #self.x = 0
@@ -19,21 +19,21 @@ class Ball(Vector):
         self.g = 0
         self.real_fps = 0
         self.real_fps_timer = time()
-        
+
     def draw(self):
         try:
             canvas.delete("all")
             canvas.create_oval( [self.x-self.radius,self.y-self.radius], [self.x+self.radius,self.y+self.radius], fill=self.color, outline="black")
             out_window.update()
-            self.real_fps = int(1/(time()-self.real_fps_timer))
+            self.real_fps = int(1/(time()-self.real_fps_timer+0.000000000000001))
             self.real_fps_timer = time()
         except TclError:
             off_window()
-        
+
     def delay(self):
         sleep(1/self.fps)
-        
-    
+
+
     def move_physics(self):
         # устранение критических угловых значений
         while (self.angle<0): self.angle+=360
@@ -52,10 +52,10 @@ class Ball(Vector):
         self.x-=dx
         self.y+=dy
         #self.y-=1
-    
-        
+
+
 ball = Ball()
-    
+
 ball.x = 250
 ball.y = 100
 ball.radius = 5
@@ -66,7 +66,7 @@ ball.color = "red"
 #ball.g = 0.01
 
 g = Vector(angle=0,speed=0.7)
-    
+
 
 while (test_window() and 0):
     ball.x, ball.y = mouse_coo()
@@ -90,7 +90,7 @@ while (test_window()):
         else:
             if (ball.x-ball.radius<=0 and 0<ball.angle<180 or ball.x+ball.radius>AREA_X and 180<ball.angle<360): # врезались левой или правой частью
                 ball.angle = 360-ball.angle
-            if (ball.y-ball.radius<=0 and 90<ball.angle<270 or ball.y+ball.radius>=AREA_Y and (ball.angle>0 or ball.angle<90)): # врезались верхней или нижней частью 
+            if (ball.y-ball.radius<=0 and 90<ball.angle<270 or ball.y+ball.radius>=AREA_Y and (ball.angle>0 or ball.angle<90)): # врезались верхней или нижней частью
                 ball.angle = 540-ball.angle
                 #if (ball.y+ball.radius>=AREA_Y): ball.fps = ball.fps*1.1
                 if (ball.y+ball.radius>=AREA_Y): ball.speed = ball.speed/1.3
@@ -101,18 +101,18 @@ while (test_window()):
         #print(ball.speed)
         ball.draw()
         ball.delay()
-    MAX_FPS = max(MAX_FPS,ball.real_fps)    
+    MAX_FPS = max(MAX_FPS,ball.real_fps)
 print("MAX_FPS",MAX_FPS) # 2200 бех numba
-        
+
         #print(ball.x,ball.y,ball.angle,ball.speed) #event.x,event.y
     #x = out_window.winfo_pointerx()
     #y = out_window.winfo_pointery()
-    
 
-        
-    
 
-    
+
+
+
+
 #canvas.create_rectangle(ras*4,ras*9.2,ras*5,ras*9.8,fill="grey")
 #canvas.create_text(ras*7,ras*9.5,text="you must eat",font="Verdana 10",justify=CENTER,fill="black")
 #out_window.mainloop()
