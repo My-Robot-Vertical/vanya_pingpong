@@ -12,19 +12,17 @@ flag_window = 1
 def off_window():
     global flag_window
     flag_window = 0
-    
+
 def test_window():
     return flag_window
 
 def mouse_coo():
     return out_window.winfo_pointerx()-1,out_window.winfo_pointery()-82
-    
+
 def click(event):
     off_window()
     out_window.destroy()
     #print(event.x, event.y, mouse_coo())
-    
+
 canvas.bind("<Button-1>", click)
 canvas.pack()
-
-    

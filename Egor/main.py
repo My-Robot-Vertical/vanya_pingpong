@@ -68,7 +68,7 @@ ball.color = "red"
 g = Vector(angle=0,speed=0.7)
 
 
-while (test_window() and 0):
+while (test_window() and 1):
     ball.x, ball.y = mouse_coo()
     ball.draw()
     ball.delay()
