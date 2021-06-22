@@ -1,6 +1,6 @@
 from tkinter import *
 
-graphics_version = "1.0"
+#graphics_version = "1.0"
 
 class coo:
 
@@ -28,15 +28,22 @@ class Graphics:
         self.window.update()
 
     def destroy(self):
-        if (self.flag): self.window.destroy()
+        try:
+            self.window.destroy()
+        except TclError:
+            pass
         self.flag = 0
 
     def mouse_coo(self):
-        if (not self.flag): return 0,0
-        return self.window.winfo_pointerx()-self.mouse_error.x,self.window.winfo_pointery()-self.mouse_error.y
+        try:
+            if (self.flag):
+                return self.window.winfo_pointerx()-self.mouse_error.x,self.window.winfo_pointery()-self.mouse_error.y
+        except TclError:
+            self.destroy()
+        return 0,0
+
 
     def click(self,event):
-        if (not self.flag): return
         # calibrating
         self.mouse_error.x = self.window.winfo_pointerx() - event.x
         self.mouse_error.y = self.window.winfo_pointery() - event.y

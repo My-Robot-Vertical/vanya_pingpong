@@ -1,12 +1,8 @@
 from graphics import *
 from vector import *
-#from tkinter import *
-
 Vector.version("1.0")
 
-
-
-graphics_object_array = []
+#graphics_object_array = []
 
 class graphics_object(Vector):
 
@@ -18,6 +14,8 @@ class graphics_object(Vector):
         self.fill = fill
         self.type = type
         self.size = size
+        # id
+        self.name = time()
 
     def update(self):
         # занести инфу в общий массив
@@ -35,7 +33,7 @@ class graphics_area(Graphics):
     def update(self):
         try:
             if (self.flag==0): return
-            #self.canvas.delete("all")
+            self.canvas.delete("all")
             for obj in self.object:
                 if (obj.type=="oval"): self.canvas.create_oval( [obj.x-obj.size,obj.y-obj.size], [obj.x+obj.size,obj.y+obj.size], fill=obj.fill, outline=obj.outline)
                 #elif (self.type=="rectangle"): self.canvas.create_rectangle
@@ -43,14 +41,27 @@ class graphics_area(Graphics):
         except TclError:
             self.destroy()
 
+    def obj(self, obj):
+        '''
+        f = 0
+        n = 0
+        for t in self.object:
+            if (t.name==obj.name):
+                f = 1
+                break
+            n+=1
+        if (f): self.object[n] = obj
+        else: self.object.append(obj)
+        '''
+        self.object.append(obj)
+
 
 
 
 if __name__=="__main__":
-    ball = graphics_object()
-    print(ball.x)
     simulation = graphics_area(300,300)
-    t = time()
-    while (t+2>time()):
+    ball = graphics_object(x=250,y=100,type="oval",size=5,angle=300,speed=1)
+    simulation.obj(ball)
+    while (simulation.flag):
+        ball.x, ball.y = simulation.mouse_coo()
         simulation.update()
-    simulation.destroy()
