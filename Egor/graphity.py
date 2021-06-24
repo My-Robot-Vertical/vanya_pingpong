@@ -6,9 +6,9 @@ Vector.version("1.0")
 
 class graphics_object(Vector):
 
-    def __init__(self,angle=0,speed=0,x=0,y=0,save_mas=[0,0,0,0],save_coo_mas=[0,0], outline="black",fill="red",type="oval",size=5):
+    def __init__(self,angle=0,speed=0,x=0,y=0,save_mas=[0,0,0,0],save_coo_mas=[0,0], outline="black",fill="red",type="oval",size=5, mg=0,static=0):
         # Vector
-        Vector.__init__(self,angle=0,speed=0,x=0,y=0,save_mas=[0,0,0,0],save_coo_mas=[0,0])
+        Vector.__init__(self,angle=angle,speed=speed,x=x,y=y,save_mas=save_mas,save_coo_mas=save_coo_mas)
         # graphics
         self.outline = outline
         self.fill = fill
