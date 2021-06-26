@@ -21,11 +21,16 @@ class Graphics:
         self.AREA_Y = AREA_Y
         self.mouse_error = coo(0,0)
 
+        self.click_fun = []
+
         self.flag = 1
 
     def update(self):
-        if (not self.flag): return
-        self.window.update()
+        try:
+            if (not self.flag): return
+            self.window.update()
+        except TclError:
+            self.destroy()
 
     def destroy(self):
         try:
@@ -47,9 +52,29 @@ class Graphics:
         # calibrating
         self.mouse_error.x = self.window.winfo_pointerx() - event.x
         self.mouse_error.y = self.window.winfo_pointery() - event.y
+        # more function
+        for f in self.click_fun:
+            f()
         #off_window()
         #out_window.destroy()
         #print(event.x,event.y,self.window.winfo_pointerx(),self.window.winfo_pointery())
+
+    def add_click(self,f):
+        self.click_fun.append(f)
+
+if __name__=="__main__":
+    def test():
+        print("!")
+
+    def test2():
+        print("!!")
+
+    area = Graphics(300,300)
+    area.add_click(test2)
+    area.add_click(test)
+    while (area.flag):
+        area.update()
+
 
 '''
 AREA_X = 300
